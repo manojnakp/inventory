@@ -1,0 +1,222 @@
+openapi: '3.1.0'
+info:
+  title: inventory
+  summary: Inventory Management Application
+  description: >
+    **inventory** is simple *Inventory Management Application* built using `MERN` stack
+    for an imaginary store
+  version: 1.0.0
+  contact:
+    name: Manojna
+    url: https://github.com/manojnakp/inventory-mern/issues
+    email: manojna.gopher@gmail.com
+  license:
+    name: MIT License
+    identifier: MIT
+    url: https://spdx.org/licenses/MIT.html
+# servers: [ server object ]
+paths:
+  /users:
+    summary: all users
+    description: actions on collection of all users
+    get:
+      tags: [user]
+      summary: fetch all
+      description: list all the users present in `users` collection
+      operationId: fetchAllUsers
+      responses:
+        '200':
+          description: list of `User` objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/component/schemas/User'
+      security: []
+    post:
+      tags: [user]
+      summary: new
+      description: create new user in `users` collection
+      operationId: newUser
+      requestBody:
+        description: payload should consist of name and password fields
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+      '200':
+        description: user id of newly created user
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  $ref: '#/components/schemas/ObjectId'
+      '400':
+        $ref: '#/components/responses/BadRequest'
+      security: []
+  /users/{uid}:
+    summary: one user
+    description: actions on single user selected by `{uid}` parameter
+    parameters:
+      - name: uid
+        in: path
+        description: unique user id for querying a particular user
+        required: true
+        schema:
+          $ref: '#/components/schemas/ObjectId'
+    get:
+      tags: [user]
+      summary: fetch one
+      description: list single user matched by `{uid}` parameter
+      operationId: fetchUserById
+      responses:
+        '200':
+          description: the requested `User` object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+      security: []
+    patch:
+      tags: [user]
+      summary: update one
+      description: update single user matched by `{uid}` parameter
+      operationId: updateUserById
+      requestBody:
+        description: payload consists of name and password fields (both optional)
+        required: true
+        content:
+          schema:
+            $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: update of user details successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OK'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      tags: [user]
+      summary: delete one
+      description: delete one user matched by `{uid}` parameter
+      operationId: deleteUserById
+      responses:
+        '200':
+          description: delete of user successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OK'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/reponses/Unauthorized'
+#  /items:
+#    summary: all `items`
+#    description: actions on collection of all items
+#    get:
+#      # operation
+#    post:
+#      # operation
+#  /items/{itemid}:
+#    summary: one item
+#    description: actions on single item selected by `{itemid}` parameter
+#    get:
+#      # operation
+#    put:
+#      # operation
+#    delete:
+#      # operation
+#  /categories:
+#    summary: all `categories`
+#    description: actions on collection of all categories
+#    get:
+#      # operation
+#    post:
+#      # operation
+#  /categories/{catid}:
+#    summary: one category
+#    description: actions on single category selected by `{catid}` parameter
+#    get:
+#      # operation
+#    put:
+#      # operation
+#    delete:
+#      # operation
+components:
+  schemas:
+    User:
+      title: User
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/ObjectId'
+        name:
+          type: string
+          description: username
+        password:
+          type: string
+          minimum: 8
+          maximum: 20
+    ObjectId:
+      title: mongodb object id
+      type: string
+    OK:
+      title: operation OK
+      type: object
+      required:
+        - ok
+      properties:
+        ok:
+          type: boolean
+    Error:
+      title: action error
+      type: object
+      required:
+        - error
+      properties:
+        error: string
+  responses:
+    BadRequest:
+      description: server cannot or will not process the request due to incorrect request message
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+#  responses: # response objects
+#  parameters: # parameter objects
+#  examples: # example objects
+#  requestBodies: # request body objects
+#  headers: # header objects
+  securitySchemes:
+    bearerAuth:
+      type: http
+      description: use json web tokens in the `Authorization` header
+      scheme: bearer
+      bearerFormat: jwt
+#  links: # link objects
+#  callbacks: # callback objects
+#  pathItems: # path item objects
+security:
+  - bearerAuth: []
+tags:
+  - name: user
+    description: actions related to `users` collection
+  - name: item
+    description: actions related to `items` collection
+  - name: category
+    description: actions related to `categories` collection
