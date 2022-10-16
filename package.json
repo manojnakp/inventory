@@ -8,5 +8,8 @@
   },
   "keywords": [],
   "author": "Manojna",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@redocly/cli": "1.0.0-beta.111"
+  }
 }
