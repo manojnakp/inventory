@@ -1,0 +1,46 @@
+summary: all users
+description: actions on collection of all users
+get:
+  tags:
+    - user
+  summary: fetch all
+  description: list all the users present in `users` collection
+  operationId: fetchAllUsers
+  responses:
+    '200':
+      description: list of `User` objects
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/User.yaml
+  security: []
+post:
+  tags:
+    - user
+  summary: new
+  description: create new user in `users` collection
+  operationId: newUser
+  requestBody:
+    description: payload should consist of name and password fields
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/User.yaml
+  responses:
+    '200':
+      description: user id of newly created user
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - id
+            properties:
+              id:
+                $ref: ../components/schemas/ObjectId.yaml
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+  security: []

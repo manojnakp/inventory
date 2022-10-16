@@ -1,0 +1,46 @@
+summary: all categories
+description: actions on collection of all categories
+get:
+  tags:
+    - category
+  summary: fetch all
+  description: list all the categories present in `categories` collection
+  operationId: fetchAllCategories
+  responses:
+    '200':
+      description: list of `Category` objects
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Category.yaml
+  security: []
+post:
+  tags:
+    - category
+  summary: new
+  description: create new category in `categories` collection
+  operationId: newCategory
+  requestBody:
+    description: payload should consist of entire schema of category object
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Category.yaml
+  responses:
+    '200':
+      description: category id of newly created category
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - id
+            properties:
+              id:
+                $ref: ../components/schemas/ObjectId.yaml
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+  security: []

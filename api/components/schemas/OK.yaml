@@ -1,0 +1,7 @@
+title: operation OK
+type: object
+required:
+  - ok
+properties:
+  ok:
+    type: boolean

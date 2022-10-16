@@ -1,0 +1,65 @@
+summary: one category
+description: actions on single category selected by `{catid}` parameter
+parameters:
+  - name: catid
+    in: path
+    description: unique category id for querying a particular category
+    required: true
+    schema:
+      $ref: ../components/schemas/ObjectId.yaml
+get:
+  tags:
+    - category
+  summary: fetch one
+  description: list single category matched by `{catid}` parameter
+  operationId: fetchCategoryById
+  responses:
+    '200':
+      description: the requested `Category` object
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Category.yaml
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+  security: []
+patch:
+  tags:
+    - category
+  summary: update one
+  description: update single category matched by `{catid}` parameter
+  operationId: updateCategoryById
+  requestBody:
+    description: payload consists of partially the fields of category object
+    required: true
+    content:
+      schema:
+        $ref: ../components/schemas/Category.yaml
+  responses:
+    '200':
+      description: update of category details successful
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/OK.yaml
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+delete:
+  tags:
+    - category
+  summary: delete one
+  description: delete one category matched by `{catid}` parameter
+  operationId: deleteCategoryById
+  responses:
+    '200':
+      description: delete of category successful
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/OK.yaml
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml

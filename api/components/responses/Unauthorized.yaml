@@ -1,0 +1,5 @@
+description: client is not logged in, please login to continue accessing the resource
+content:
+  application/json:
+    schema:
+      $ref: ../schemas/Error.yaml

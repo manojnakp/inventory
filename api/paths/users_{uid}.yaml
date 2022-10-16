@@ -1,0 +1,65 @@
+summary: one user
+description: actions on single user selected by `{uid}` parameter
+parameters:
+  - name: uid
+    in: path
+    description: unique user id for querying a particular user
+    required: true
+    schema:
+      $ref: ../components/schemas/ObjectId.yaml
+get:
+  tags:
+    - user
+  summary: fetch one
+  description: list single user matched by `{uid}` parameter
+  operationId: fetchUserById
+  responses:
+    '200':
+      description: the requested `User` object
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/User.yaml
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+  security: []
+patch:
+  tags:
+    - user
+  summary: update one
+  description: update single user matched by `{uid}` parameter
+  operationId: updateUserById
+  requestBody:
+    description: payload consists of name and password fields (both optional)
+    required: true
+    content:
+      schema:
+        $ref: ../components/schemas/User.yaml
+  responses:
+    '200':
+      description: update of user details successful
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/OK.yaml
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+delete:
+  tags:
+    - user
+  summary: delete one
+  description: delete one user matched by `{uid}` parameter
+  operationId: deleteUserById
+  responses:
+    '200':
+      description: delete of user successful
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/OK.yaml
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml

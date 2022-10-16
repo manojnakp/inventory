@@ -1,0 +1,65 @@
+summary: one item
+description: actions on single item selected by `{itemid}` parameter
+parameters:
+  - name: itemid
+    in: path
+    description: unique item id for querying a particular item
+    required: true
+    schema:
+      $ref: ../components/schemas/ObjectId.yaml
+get:
+  tags:
+    - item
+  summary: fetch one
+  description: list single item matched by `{itemid}` parameter
+  operationId: fetchItemById
+  responses:
+    '200':
+      description: the requested `User` object
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Item.yaml
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+  security: []
+patch:
+  tags:
+    - item
+  summary: update one
+  description: update single item matched by `{itemid}` parameter
+  operationId: updateItemById
+  requestBody:
+    description: payload consists of fields of item object optionally
+    required: true
+    content:
+      schema:
+        $ref: ../components/schemas/Item.yaml
+  responses:
+    '200':
+      description: update of item details successful
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/OK.yaml
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml
+delete:
+  tags:
+    - item
+  summary: delete one
+  description: delete one item matched by `{itemid}` parameter
+  operationId: deleteItemById
+  responses:
+    '200':
+      description: delete of item successful
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/OK.yaml
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '401':
+      $ref: ../components/responses/Unauthorized.yaml

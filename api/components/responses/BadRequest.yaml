@@ -1,0 +1,5 @@
+description: server cannot or will not process the request due to incorrect request message
+content:
+  application/json:
+    schema:
+      $ref: ../schemas/Error.yaml

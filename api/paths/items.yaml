@@ -1,0 +1,46 @@
+summary: all items
+description: actions on collection of all items
+get:
+  tags:
+    - item
+  summary: fetch all
+  description: list all the items present in `items` collection
+  operationId: fetchAllItems
+  responses:
+    '200':
+      description: list of `User` objects
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Item.yaml
+  security: []
+post:
+  tags:
+    - item
+  summary: new
+  description: create new item in `items` collection
+  operationId: newItem
+  requestBody:
+    description: payload should consist of entire schema of item object
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Item.yaml
+  responses:
+    '200':
+      description: item id of newly created item
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - id
+            properties:
+              id:
+                $ref: ../components/schemas/ObjectId.yaml
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+  security: []

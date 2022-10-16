@@ -1,0 +1,12 @@
+title: User
+type: object
+properties:
+  id:
+    $ref: ./ObjectId.yaml
+  name:
+    type: string
+    description: username
+  password:
+    type: string
+    minimum: 8
+    maximum: 20

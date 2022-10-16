@@ -1,0 +1,19 @@
+title: Category
+type: object
+required:
+  - id
+  - name
+  - items
+properties:
+  id:
+    $ref: ./ObjectId.yaml
+  name:
+    type: string
+    description: category name
+  desc:
+    type: string
+    description: category description
+  items:
+    type: array
+    items:
+      $ref: ./ObjectId.yaml
