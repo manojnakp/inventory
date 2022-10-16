@@ -15,4 +15,9 @@ properties:
     type: string
     description: item description
   category:
-    $ref: ./Category.yaml
+    $ref: ./ObjectId.yaml
+example:
+  id: 634b7f08a80214c1d3a70ed8
+  name: Keychain
+  desc: a keyring for storing keys
+  category: 634b7f94a80214c1d3a70ed9

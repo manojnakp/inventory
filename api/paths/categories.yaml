@@ -29,6 +29,10 @@ post:
       application/json:
         schema:
           $ref: ../components/schemas/Category.yaml
+        example:
+          name: Rings
+          desc: Items related to ring and ring-like objects
+          items: []
   responses:
     '200':
       description: category id of newly created category
@@ -41,6 +45,8 @@ post:
             properties:
               id:
                 $ref: ../components/schemas/ObjectId.yaml
+            example:
+              id: 634b7f94a80214c1d3a70ed9
     '400':
       $ref: ../components/responses/BadRequest.yaml
   security: []

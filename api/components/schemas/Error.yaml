@@ -5,3 +5,4 @@ required:
 properties:
   error:
     type: string
+    example: the requested action could not be performed!! an error occurred while deserializing json

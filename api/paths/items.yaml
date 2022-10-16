@@ -29,6 +29,10 @@ post:
       application/json:
         schema:
           $ref: ../components/schemas/Item.yaml
+        example:
+          name: Keychain
+          desc: a keyring for storing keys
+          category: 634b7f94a80214c1d3a70ed9
   responses:
     '200':
       description: item id of newly created item
@@ -41,6 +45,8 @@ post:
             properties:
               id:
                 $ref: ../components/schemas/ObjectId.yaml
+            example:
+              id: 634b7f08a80214c1d3a70ed8
     '400':
       $ref: ../components/responses/BadRequest.yaml
   security: []

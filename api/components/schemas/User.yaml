@@ -6,7 +6,9 @@ properties:
   name:
     type: string
     description: username
+    example: smith
   password:
     type: string
     minimum: 8
     maximum: 20
+    example: jSmith433

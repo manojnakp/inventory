@@ -17,3 +17,9 @@ properties:
     type: array
     items:
       $ref: ./ObjectId.yaml
+example:
+  id: 634b7f94a80214c1d3a70ed9
+  name: Rings
+  desc: Items related to ring and ring-like objects
+  items:
+    - 634b7f08a80214c1d3a70ed8

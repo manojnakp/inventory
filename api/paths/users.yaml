@@ -29,6 +29,9 @@ post:
       application/json:
         schema:
           $ref: ../components/schemas/User.yaml
+        example:
+          name: smith
+          password: jSmith433
   responses:
     '200':
       description: user id of newly created user

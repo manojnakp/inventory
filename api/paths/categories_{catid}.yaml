@@ -7,6 +7,7 @@ parameters:
     required: true
     schema:
       $ref: ../components/schemas/ObjectId.yaml
+    example: 634b7f94a80214c1d3a70ed9
 get:
   tags:
     - category
